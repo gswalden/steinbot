@@ -1,5 +1,6 @@
 var Bot = require('node-telegram-bot')
   , random = require('random-item')
+  , http = require('http')
   , util = require('util')
   , ms = require('ms')
   , lastMsg = 0
@@ -49,3 +50,9 @@ var bot = new Bot({
   }
 })
 .start();
+
+var server = http.createServer(function(req, res) {
+  res.end('Get in and get it!');
+}).listen(process.env.PORT || 8000, function() {
+  console.log('Listening…');
+});
