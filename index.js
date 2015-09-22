@@ -1,0 +1,51 @@
+var Bot = require('node-telegram-bot')
+  , random = require('random-item')
+  , util = require('util')
+  , ms = require('ms')
+  , lastMsg = 0
+  , lastImg
+  ;
+
+var images = [
+  'C9dbSsI',
+  'n3IceiW',
+  'F6FIQVv',
+  'DbpIEmt',
+  'BEwy6xf',
+  'tTVp3eD',
+  '65xjKM9',
+  'pKa0YqR',
+  '4hEmCx1',
+  '80x6csr',
+];
+
+var bot = new Bot({
+  token: '122937425:AAF1L6VZtpWIzTXpQ_4waPsBem4BLLTeNFA'
+})
+.on('message', function(message) {
+  if (/\!steines/i.test(message.text)) {
+    console.log(message);
+    
+    var msg, time;
+    if (Date.now() - lastMsg < ms('10s')) {
+      msg = 'Slow down there, haus.';
+    } else {
+      do {
+        var image = random(images);
+      } while (image === lastImg);
+      msg = util.format('https://i.imgur.com/%s.jpg', image);
+      lastImg = image;
+      time = Date.now();
+    }
+
+    bot.sendMessage({
+      chat_id: message.chat.id,
+      text: msg
+    }, function() {
+      if (time) {
+        lastMsg = time;
+      }
+    });
+  }
+})
+.start();

@@ -1,0 +1,16 @@
+{
+  "name": "steinbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ms": "^0.7.1",
+    "node-telegram-bot": "^0.1.2",
+    "random-item": "^1.0.0"
+  }
+}
