@@ -37,6 +37,8 @@ var images = [
   'pTPSbbr',
 ];
 
+var gil = ['Ws0yS27'];
+
 var bot = new Bot({
   token: '122937425:AAF1L6VZtpWIzTXpQ_4waPsBem4BLLTeNFA'
 })
@@ -63,6 +65,11 @@ var bot = new Bot({
       if (time) {
         lastMsg = time;
       }
+    });
+  } else (/\!gil/i.test(message.text)) {
+    bot.sendMessage({
+      chat_id: message.chat.id,
+      text: random(gil)
     });
   }
 })
