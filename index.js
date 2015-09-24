@@ -69,7 +69,7 @@ var bot = new Bot({
   } else (/\!gil/i.test(message.text)) {
     bot.sendMessage({
       chat_id: message.chat.id,
-      text: random(gil)
+      text: util.format('https://i.imgur.com/%s.jpg', random(gil))
     });
   }
 })
