@@ -66,7 +66,7 @@ var bot = new Bot({
         lastMsg = time;
       }
     });
-  } else (/\!gil/i.test(message.text)) {
+  } else if (/\!gil/i.test(message.text)) {
     bot.sendMessage({
       chat_id: message.chat.id,
       text: util.format('https://i.imgur.com/%s.jpg', random(gil))
