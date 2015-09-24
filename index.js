@@ -46,7 +46,7 @@ var images = [
 var gil = ['Ws0yS27'];
 
 var bot = new Bot({
-  token: '122937425:AAF1L6VZtpWIzTXpQ_4waPsBem4BLLTeNFA'
+  token: process.env.TELEGRAM_TOKEN
 })
 .on('message', function(message) {
   if (/\!steines/i.test(message.text)) {
