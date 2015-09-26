@@ -45,6 +45,15 @@ var images = [
 
 var gil = ['Ws0yS27'];
 
+var gong = [
+  'Oh it\'s good',
+  'NOT. GOOD.',
+  'Good',
+  'Not good',
+  'Would burn, would laugh',
+  'It hits'
+];
+
 var bot = new Bot({
   token: process.env.TELEGRAM_TOKEN
 })
@@ -76,6 +85,11 @@ var bot = new Bot({
     bot.sendMessage({
       chat_id: message.chat.id,
       text: util.format('https://i.imgur.com/%s.jpg', random(gil))
+    });
+  } else if (/\!gong/i.test(message.text)) {
+    bot.sendMessage({
+      chat_id: message.chat.id,
+      text: random(gong)
     });
   }
 })
