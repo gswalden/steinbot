@@ -81,12 +81,14 @@ var bot = new Bot({
         lastMsg = time;
       }
     });
-  } else if (/\!gil/i.test(message.text)) {
+  }
+  if (/\!gil/i.test(message.text)) {
     bot.sendMessage({
       chat_id: message.chat.id,
       text: util.format('https://i.imgur.com/%s.jpg', random(gil))
     });
-  } else if (/\!gong/i.test(message.text)) {
+  }
+  if (/\!gong/i.test(message.text)) {
     bot.sendMessage({
       chat_id: message.chat.id,
       text: random(gong)
