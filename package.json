@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,5 +12,9 @@
     "ms": "^0.7.1",
     "node-telegram-bot": "^0.1.2",
     "random-item": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gswalden/steinbot.git"
   }
 }

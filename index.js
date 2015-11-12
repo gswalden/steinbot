@@ -1,13 +1,17 @@
-var Bot = require('node-telegram-bot')
+'use strict';
+
+const Bot = require('node-telegram-bot')
   , random = require('random-item')
   , http = require('http')
   , util = require('util')
   , ms = require('ms')
-  , lastMsg = 0
+  ;
+
+let lastMsg = 0
   , lastImg
   ;
 
-var images = [
+const images = [
   'C9dbSsI',
   'n3IceiW',
   'F6FIQVv',
@@ -43,9 +47,9 @@ var images = [
   '9Vm4PQH',
 ];
 
-var gil = ['Ws0yS27'];
+const gil = ['Ws0yS27'];
 
-var gong = [
+const gong = [
   'Oh it\'s good',
   'NOT. GOOD.',
   'Good',
@@ -54,19 +58,29 @@ var gong = [
   'It hits'
 ];
 
-var bot = new Bot({
+const soup = [
+  'Soup',
+  'Sammy',
+  'Soup there it is!',
+  'Summer of Sammy',
+  'Clearly soup',
+  'Definite sammy'
+];
+
+const bot = new Bot({
   token: process.env.TELEGRAM_TOKEN
 })
-.on('message', function(message) {
+.on('message', message => {
   if (/\!steines/i.test(message.text)) {
     console.log(message);
     
-    var msg, time;
-    if (Date.now() - lastMsg < ms('10s')) {
+    let msg, time;
+    if (Date.now() - lastMsg < ms('5s')) {
       msg = 'Slow down there, haus.';
     } else {
+      let image;
       do {
-        var image = random(images);
+        image = random(images);
       } while (image === lastImg);
       msg = util.format('https://i.imgur.com/%s.jpg', image);
       lastImg = image;
@@ -76,7 +90,7 @@ var bot = new Bot({
     bot.sendMessage({
       chat_id: message.chat.id,
       text: msg
-    }, function() {
+    }, () => {
       if (time) {
         lastMsg = time;
       }
@@ -94,11 +108,19 @@ var bot = new Bot({
       text: random(gong)
     });
   }
+  if (/\!(sos|soup|samm(y|ie))/i.test(message.text)) {
+    bot.sendMessage({
+      chat_id: message.chat.id,
+      text: random(soup)
+    });
+  }
 })
 .start();
 
-var server = http.createServer(function(req, res) {
+const server = http.createServer((req, res) => {
   res.end('Get in and get it!');
-}).listen(process.env.PORT || 8000, function() {
+}).listen(process.env.PORT || 8000, () => {
   console.log('Listening…');
 });
+
+module.exports = server;
