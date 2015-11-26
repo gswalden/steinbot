@@ -75,6 +75,11 @@ const committee = [
   'Goin\' committee'
 ];
 
+const decided = [
+  'The committee is in:',
+  'Chuck has decreed:'
+];
+
 const bot = new Bot({
   token: process.env.TELEGRAM_TOKEN
 })
@@ -84,6 +89,12 @@ const bot = new Bot({
   const delay = (_.random(99) < 5) ? _.random(ms('2min'), ms('5min')) : 0;
   _.delay(respond, delay, message);
   if (delay > 0) {
+    _.delay(() => {
+      bot.sendMessage({
+        chat_id: message.chat.id,
+        text: random(decided)
+      });
+    }, delay - 10);
     bot.sendMessage({
       chat_id: message.chat.id,
       text: random(committee)
