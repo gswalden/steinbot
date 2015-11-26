@@ -1,7 +1,8 @@
 'use strict';
 
 const Bot = require('node-telegram-bot')
-  , random = require('random-item')
+  , _ = require('lodash')
+  , random = _.sample
   , http = require('http')
   , util = require('util')
   , ms = require('ms')
@@ -68,10 +69,30 @@ const soup = [
   'Definite sammy'
 ];
 
+const committee = [
+  'Yikes, that\'s gotta go to committee',
+  'Farmin\' it out to committee',
+  'Goin\' committee'
+];
+
 const bot = new Bot({
   token: process.env.TELEGRAM_TOKEN
 })
 .on('message', message => {
+  if (!message.text) return;
+
+  const delay = (_.random(99) < 5) ? _.random(ms('2min'), ms('5min')) : 0;
+  _.delay(respond, delay, message);
+  if (delay > 0) {
+    bot.sendMessage({
+      chat_id: message.chat.id,
+      text: random(committee)
+    });
+  }
+})
+.start();
+
+function respond(message) {
   if (/\!steines/i.test(message.text)) {
     console.log(message);
     
@@ -115,8 +136,7 @@ const bot = new Bot({
       text: random(soup)
     });
   }
-})
-.start();
+}
 
 const server = http.createServer((req, res) => {
   res.end('Get in and get it!');
