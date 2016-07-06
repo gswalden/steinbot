@@ -4,16 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start index.js",
-    "poststart": "pm2 logs all"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lodash": "^3.10.1",
     "ms": "^0.7.1",
-    "node-telegram-bot": "^0.1.2",
-    "pm2": "^0.15.10"
+    "node-telegram-bot": "^0.1.9",
+    "random-item": "^1.0.0"
   },
   "repository": {
     "type": "git",
