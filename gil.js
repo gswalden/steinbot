@@ -1,6 +1,6 @@
 'use strict';
 
-if (!process.env.TELEGRAM_TOKEN_GIL) return;
+if (!process.env.TELEGRAM_TOKEN_GIL || !process.env.NETTI_ID) return;
 
 const Bot = require('node-telegram-bot')
   , _ = require('lodash')
@@ -13,11 +13,16 @@ const bot = new Bot({
   token: process.env.TELEGRAM_TOKEN_GIL
 }).on('message', message => {
   if (
-    _.get(message, ('from.id')) !== 127208793
+    _.get(message, ('from.id')) != process.env.NETTI_ID
     || !_.isArray(message.entities)
     || Date.now() < cooldown
     // || !/cassaniti/i.test(_.get(message, ('from.last_name')))
-  ) return;
+  ) {
+    console.log(message.from);
+    console.log(message.text);
+    return;
+  }
+    
 
   if (_.some(message.entities, entity => entity.type === 'url')) {
     bot.sendMessage({
