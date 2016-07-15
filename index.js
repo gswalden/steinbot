@@ -149,6 +149,8 @@ function respond(message) {
   }
 }
 
+require('./gil');
+
 const server = http.createServer((req, res) => {
   res.end('Get in and get it!');
 }).listen(process.env.PORT || 8000, () => {
