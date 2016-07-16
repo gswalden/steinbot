@@ -83,7 +83,7 @@ const decided = [
 const bot = new Bot({
   token: process.env.TELEGRAM_TOKEN
 })
-.on('message', message => {
+/*.on('message', message => {
   if (!message.text) return;
 
   const delay = (_.random(99) < 5) ? _.random(ms('2min'), ms('5min')) : 0;
@@ -100,7 +100,7 @@ const bot = new Bot({
       text: random(committee)
     });
   }
-})
+})*/
 .start();
 
 function respond(message) {
