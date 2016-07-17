@@ -83,6 +83,10 @@ const decided = [
 
 const bot = new Bot({
   token: process.env.TELEGRAM_TOKEN
+}).on('message', message => {
+  if (!message.text) return;
+  if (Date.now < (1468795206909 + ms('5m'))) return;
+  respond(message);
 })
 .on('message', message => {
   if (!message.text) return;
