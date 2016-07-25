@@ -66,7 +66,8 @@ const soup = [
   'Soup there it is!',
   'Summer of Sammy',
   'Clearly soup',
-  'Definite sammy'
+  'Definite sammy',
+  'Have you considered salad?',
 ];
 
 const committee = [
