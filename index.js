@@ -86,10 +86,6 @@ const bot = new Bot({
 }).on('message', message => {
   if (!message.text) return;
   respond(message);
-})
-.on('message', message => {
-  if (!message.text) return;
-  respond(message);
   /*
   const delay = (_.random(99) < 5) ? _.random(ms('2min'), ms('5min')) : 0;
   _.delay(respond, delay, message);
