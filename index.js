@@ -70,6 +70,11 @@ const soup = [
   'Have you considered salad?',
 ];
 
+const e40 = [
+  'Yup.',
+  'Nope.'
+];
+
 const committee = [
   'Yikes, that\'s gotta go to committee',
   'Farmin\' it out to committee',
@@ -146,6 +151,12 @@ function respond(message) {
     bot.sendMessage({
       chat_id: message.chat.id,
       text: random(soup)
+    });
+  }
+  if (/\!e40/i.test(message.text)) {
+    bot.sendMessage({
+      chat_id: message.chat.id,
+      text: random(e40)
     });
   }
 }
