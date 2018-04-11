@@ -22,7 +22,7 @@ const bot = new Bot({
     console.log(message.text);
     return;
   }
-    
+
 
   if (_.some(message.entities, entity => entity.type === 'url')) {
     bot.sendMessage({
@@ -37,6 +37,6 @@ const bot = new Bot({
 const stops = [
   'Ya gotta stop',
   'YA STOP. It\'s what ya do.',
-  // 'Uhhhhhhhhhhhhhhh',
-  // 'UHHHHHHHHHHHHHHHHHHHHHHHHH'
+  'Uhhhhhhhhhhhhhhh',
+  'UHHHHHHHHHHHHHHHHHHHHHHHHH'
 ]
