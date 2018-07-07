@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js"
   },
-  "author": "Greg Walden <hi@gsw.nyc>",
+  "author": "Greg Walden <talk@gsw.nyc>",
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.13.1",
