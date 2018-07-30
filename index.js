@@ -170,7 +170,7 @@ function respond(message) {
 const sendSad = _.throttle(function(message) {
   bot.sendMessage({
     chat_id: message.chat.id,
-    text: util.format('https://i.imgur.com/%s.jpg', random(sad)
+    text: util.format('https://i.imgur.com/%s.jpg', random(sad))
   });
 }, 1000 * 60 * 5);
 
