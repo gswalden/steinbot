@@ -76,6 +76,8 @@ const e40 = [
   'Nope.'
 ];
 
+const sad = ['jzdy5Hy'];
+
 const committee = [
   'Yikes, that\'s gotta go to committee',
   'Farmin\' it out to committee',
@@ -158,6 +160,12 @@ function respond(message) {
     bot.sendMessage({
       chat_id: message.chat.id,
       text: random(e40)
+    });
+  }
+  if (/\\bsad\b/i.test(message.text)) {
+    bot.sendMessage({
+      chat_id: message.chat.id,
+      text: util.format('https://i.imgur.com/%s.jpg', random(sad))
     });
   }
 }
