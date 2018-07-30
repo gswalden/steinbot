@@ -162,7 +162,7 @@ function respond(message) {
       text: random(e40)
     });
   }
-  if (/\\bsad\b/i.test(message.text)) {
+  if (/\bsad\b/i.test(message.text)) {
     bot.sendMessage({
       chat_id: message.chat.id,
       text: util.format('https://i.imgur.com/%s.jpg', random(sad))
