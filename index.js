@@ -163,12 +163,16 @@ function respond(message) {
     });
   }
   if (/\bsad\b/i.test(message.text)) {
-    bot.sendMessage({
-      chat_id: message.chat.id,
-      text: util.format('https://i.imgur.com/%s.jpg', random(sad))
-    });
+    sendSad(message);
   }
 }
+
+const sendSad = _.throttle(function(message) {
+  bot.sendMessage({
+    chat_id: message.chat.id,
+    text: util.format('https://i.imgur.com/%s.jpg', random(sad)
+  });
+}, 1000 * 60 * 5);
 
 require('./gil');
 
