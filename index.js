@@ -76,7 +76,10 @@ const e40 = [
   'Nope.'
 ];
 
-const sad = ['jzdy5Hy'];
+const sad = [
+  // 'jzdy5Hy',
+  'ZV3oNGT',
+];
 
 const committee = [
   'Yikes, that\'s gotta go to committee',
