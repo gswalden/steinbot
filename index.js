@@ -118,7 +118,7 @@ const bot = new Bot({
 function respond(message) {
   if (/\!steines/i.test(message.text)) {
     console.log(message);
-    
+
     let msg, time;
     if (Date.now() - lastMsg < ms('5s')) {
       msg = 'Slow down there, haus.';
@@ -177,7 +177,7 @@ const sendSad = _.throttle(function(message) {
   });
 }, 1000 * 60 * 5);
 
-require('./gil');
+// require('./gil');
 
 const server = http.createServer((req, res) => {
   res.end('Get in and get it!');
