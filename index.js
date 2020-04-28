@@ -189,6 +189,7 @@ async function pun() {
       attr: 'src',
     },
   });
+  console.log(data);
   return data.img;
 }
 
