@@ -1,16 +1,14 @@
 'use strict';
 
-const Bot = require('node-telegram-bot')
-  , _ = require('lodash')
-  , random = _.sample
-  , http = require('http')
-  , util = require('util')
-  , ms = require('ms')
-  ;
-
-let lastMsg = 0
-  , lastImg
-  ;
+const Bot = require('node-telegram-bot');
+const _ = require('lodash');
+const random = _.sample;
+const http = require('http');
+const util = require('util');
+const ms = require('ms');
+const scrape = require('scrape-it');
+let lastMsg = 0;
+let lastImg;
 
 const images = [
   'C9dbSsI',
@@ -53,12 +51,12 @@ const images = [
 const gil = ['Ws0yS27'];
 
 const gong = [
-  'Oh it\'s good',
+  "Oh it's good",
   'NOT. GOOD.',
   'Good',
   'Not good',
   'Would burn, would laugh',
-  'It hits'
+  'It hits',
 ];
 
 const soup = [
@@ -71,10 +69,7 @@ const soup = [
   'Have you considered salad?',
 ];
 
-const e40 = [
-  'Yup.',
-  'Nope.'
-];
+const e40 = ['Yup.', 'Nope.'];
 
 const sad = [
   // 'jzdy5Hy',
@@ -82,22 +77,20 @@ const sad = [
 ];
 
 const committee = [
-  'Yikes, that\'s gotta go to committee',
-  'Farmin\' it out to committee',
-  'Goin\' committee'
+  "Yikes, that's gotta go to committee",
+  "Farmin' it out to committee",
+  "Goin' committee",
 ];
 
-const decided = [
-  'The committee is in:',
-  'Chuck has decreed:'
-];
+const decided = ['The committee is in:', 'Chuck has decreed:'];
 
 const bot = new Bot({
-  token: process.env.TELEGRAM_TOKEN
-}).on('message', message => {
-  if (!message.text) return;
-  respond(message);
-  /*
+  token: process.env.TELEGRAM_TOKEN,
+})
+  .on('message', message => {
+    if (!message.text) return;
+    respond(message);
+    /*
   const delay = (_.random(99) < 5) ? _.random(ms('2min'), ms('5min')) : 0;
   _.delay(respond, delay, message);
   if (delay > 0) {
@@ -112,8 +105,8 @@ const bot = new Bot({
       text: random(committee)
     });
   }*/
-})
-.start();
+  })
+  .start();
 
 async function respond(message) {
   if (/\!steines/i.test(message.text)) {
@@ -132,19 +125,22 @@ async function respond(message) {
       time = Date.now();
     }
 
-    bot.sendMessage({
-      chat_id: message.chat.id,
-      text: msg
-    }, () => {
-      if (time) {
-        lastMsg = time;
+    bot.sendMessage(
+      {
+        chat_id: message.chat.id,
+        text: msg,
+      },
+      () => {
+        if (time) {
+          lastMsg = time;
+        }
       }
-    });
+    );
   }
   if (/\!gil/i.test(message.text)) {
     bot.sendMessage({
       chat_id: message.chat.id,
-      text: util.format('https://i.imgur.com/%s.jpg', random(gil))
+      text: util.format('https://i.imgur.com/%s.jpg', random(gil)),
     });
   }
   if (/\!gong/i.test(message.text)) {
@@ -162,13 +158,13 @@ async function respond(message) {
   if (/\!(sos|soup|samm(y|ie))/i.test(message.text)) {
     bot.sendMessage({
       chat_id: message.chat.id,
-      text: random(soup)
+      text: random(soup),
     });
   }
   if (/\!e40/i.test(message.text)) {
     bot.sendMessage({
       chat_id: message.chat.id,
-      text: random(e40)
+      text: random(e40),
     });
   }
   if (/\bsad\b/i.test(message.text)) {
@@ -176,18 +172,18 @@ async function respond(message) {
   }
 }
 
-const sendSad = _.throttle(function(message) {
+const sendSad = _.throttle(function (message) {
   bot.sendMessage({
     chat_id: message.chat.id,
-    text: util.format('https://i.imgur.com/%s.jpg', random(sad))
+    text: util.format('https://i.imgur.com/%s.jpg', random(sad)),
   });
 }, 1000 * 60 * 5);
 
 async function pun() {
-  const data = await scrape("https://mondaypunday.com", {
+  const data = await scrape('https://mondaypunday.com', {
     img: {
-      selector: "figure img",
-      attr: "src",
+      selector: 'figure img',
+      attr: 'src',
     },
   });
   return data.img;
@@ -195,10 +191,12 @@ async function pun() {
 
 // require('./gil');
 
-const server = http.createServer((req, res) => {
-  res.end('Get in and get it!');
-}).listen(process.env.PORT || 8000, () => {
-  console.log('Listening…');
-});
+const server = http
+  .createServer((req, res) => {
+    res.end('Get in and get it!');
+  })
+  .listen(process.env.PORT || 8000, () => {
+    console.log('Listening…');
+  });
 
 module.exports = server;
