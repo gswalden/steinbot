@@ -115,7 +115,7 @@ const bot = new Bot({
 })
 .start();
 
-function respond(message) {
+async function respond(message) {
   if (/\!steines/i.test(message.text)) {
     console.log(message);
 
