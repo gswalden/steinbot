@@ -150,7 +150,13 @@ function respond(message) {
   if (/\!gong/i.test(message.text)) {
     bot.sendMessage({
       chat_id: message.chat.id,
-      text: random(gong)
+      text: random(gong),
+    });
+  }
+  if (/\!pun/i.test(message.text)) {
+    bot.sendMessage({
+      chat_id: message.chat.id,
+      text: await pun(),
     });
   }
   if (/\!(sos|soup|samm(y|ie))/i.test(message.text)) {
@@ -176,6 +182,16 @@ const sendSad = _.throttle(function(message) {
     text: util.format('https://i.imgur.com/%s.jpg', random(sad))
   });
 }, 1000 * 60 * 5);
+
+async function pun() {
+  const data = await scrape("https://mondaypunday.com", {
+    img: {
+      selector: "figure img",
+      attr: "src",
+    },
+  });
+  return data.img;
+}
 
 // require('./gil');
 
