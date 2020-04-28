@@ -183,13 +183,12 @@ const sendSad = _.throttle(function (message) {
 }, 1000 * 60 * 5);
 
 async function pun() {
-  const data = await scrape('https://mondaypunday.com', {
+  const { data } = await scrape('https://mondaypunday.com', {
     img: {
       selector: 'figure img',
       attr: 'src',
     },
   });
-  console.log(data);
   return data.img;
 }
 
