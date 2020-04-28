@@ -150,9 +150,12 @@ async function respond(message) {
     });
   }
   if (/\!pun/i.test(message.text)) {
+    console.log('Getting pun...');
+    const url = await pun();
+    console.log('Saw', url);
     bot.sendMessage({
       chat_id: message.chat.id,
-      text: await pun(),
+      text: url,
     });
   }
   if (/\!(sos|soup|samm(y|ie))/i.test(message.text)) {
