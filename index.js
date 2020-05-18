@@ -153,14 +153,19 @@ async function respond(message) {
     console.log('Getting pun...');
     const urlData = await pun();
     console.log('Saw', urlData);
-    await bot.sendMessage({
+    bot.sendPhoto({
       chat_id: message.chat.id,
-      text: urlData.img,
+      photo: urlData.img,
+      caption: urlData.link,
     });
-    await bot.sendMessage({
-      chat_id: message.chat.id,
-      text: urlData.link,
-    });
+    // await bot.sendMessage({
+    //   chat_id: message.chat.id,
+    //   text: urlData.img,
+    // });
+    // await bot.sendMessage({
+    //   chat_id: message.chat.id,
+    //   text: urlData.link,
+    // });
   }
   if (/\!(sos|soup|samm(y|ie))/i.test(message.text)) {
     bot.sendMessage({
