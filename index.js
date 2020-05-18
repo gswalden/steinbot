@@ -188,8 +188,12 @@ async function pun() {
       selector: 'figure img',
       attr: 'src',
     },
+    link: {
+      selector: 'link[rel=canonical]',
+      attr: 'href',
+    },
   });
-  return data.img;
+  return [data.img, data.link].join('\n');
 }
 
 // require('./gil');
