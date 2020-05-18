@@ -86,11 +86,10 @@ const decided = ['The committee is in:', 'Chuck has decreed:'];
 
 const bot = new Bot({
   token: process.env.TELEGRAM_TOKEN,
-})
-  .on('message', message => {
-    if (!message.text) return;
-    respond(message);
-    /*
+}).on('message', message => {
+  if (!message.text) return;
+  respond(message);
+  /*
   const delay = (_.random(99) < 5) ? _.random(ms('2min'), ms('5min')) : 0;
   _.delay(respond, delay, message);
   if (delay > 0) {
@@ -105,8 +104,8 @@ const bot = new Bot({
       text: random(committee)
     });
   }*/
-  })
-  .start();
+});
+// .start();
 
 async function respond(message) {
   if (/\!steines/i.test(message.text)) {
@@ -151,11 +150,15 @@ async function respond(message) {
   }
   if (/\!pun/i.test(message.text)) {
     console.log('Getting pun...');
-    const url = await pun();
-    console.log('Saw', url);
-    bot.sendMessage({
+    const urlData = await pun();
+    console.log('Saw', urlData);
+    await bot.sendMessage({
       chat_id: message.chat.id,
-      text: url,
+      text: urlData.img,
+    });
+    await bot.sendMessage({
+      chat_id: message.chat.id,
+      text: urlData.link,
     });
   }
   if (/\!(sos|soup|samm(y|ie))/i.test(message.text)) {
@@ -193,7 +196,7 @@ async function pun() {
       attr: 'href',
     },
   });
-  return [data.link, data.img].join('\n');
+  return data;
 }
 
 // require('./gil');
@@ -207,3 +210,7 @@ const server = http
   });
 
 module.exports = server;
+
+if (require.main === module) {
+  pun();
+}
