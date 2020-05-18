@@ -193,7 +193,7 @@ async function pun() {
       attr: 'href',
     },
   });
-  return [data.img, data.link].join('\n');
+  return [data.link, data.img].join('\n');
 }
 
 // require('./gil');
