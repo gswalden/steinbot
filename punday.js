@@ -1,7 +1,7 @@
 const axios = require('axios');
 const Cache = require('node-cache');
 const scrape = require('scrape-it');
-const FormData = require('form-data');
+const querystring = require('querystring');
 const myCache = new Cache({
   stdTTL: 60 * 60,
 });
@@ -14,9 +14,8 @@ async function answer(text, id = null) {
     const data = await getCurrentUrlAndPun();
     link = data.link;
   }
-  const form = new FormData();
-  form.append('answer', text.trim().toLowerCase());
-  const res = await axios.post(link, form, { headers: form.getHeaders() });
+  const form = querystring.stringify({ answer: text.trim().toLowerCase() });
+  const res = await axios.post(link, form);
   if (res.data.match(/not\s+correct/i)) {
     return false;
   }
