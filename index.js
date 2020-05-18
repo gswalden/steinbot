@@ -86,10 +86,11 @@ const decided = ['The committee is in:', 'Chuck has decreed:'];
 
 const bot = new Bot({
   token: process.env.TELEGRAM_TOKEN,
-}).on('message', message => {
-  if (!message.text) return;
-  respond(message);
-  /*
+})
+  .on('message', message => {
+    if (!message.text) return;
+    respond(message);
+    /*
   const delay = (_.random(99) < 5) ? _.random(ms('2min'), ms('5min')) : 0;
   _.delay(respond, delay, message);
   if (delay > 0) {
@@ -104,8 +105,8 @@ const bot = new Bot({
       text: random(committee)
     });
   }*/
-});
-// .start();
+  })
+  .start();
 
 async function respond(message) {
   if (/\!steines/i.test(message.text)) {
@@ -212,5 +213,5 @@ const server = http
 module.exports = server;
 
 if (require.main === module) {
-  pun();
+  // pun();
 }
