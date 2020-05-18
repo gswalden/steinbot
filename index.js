@@ -6,7 +6,6 @@ const random = _.sample;
 const http = require('http');
 const util = require('util');
 const ms = require('ms');
-const scrape = require('scrape-it');
 const { getCurrentUrlAndPun, answer } = require('./punday');
 let lastMsg = 0;
 let lastImg;
