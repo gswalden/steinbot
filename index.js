@@ -155,7 +155,7 @@ async function respond(message) {
     console.log('Saw', urlData);
     bot.sendPhoto({
       chat_id: message.chat.id,
-      photo: urlData.img,
+      file_id: urlData.img,
       caption: urlData.link,
     });
     // await bot.sendMessage({
