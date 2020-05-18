@@ -7,6 +7,7 @@ const http = require('http');
 const util = require('util');
 const ms = require('ms');
 const scrape = require('scrape-it');
+const { getCurrentUrlAndPun, answer } = require('./punday');
 let lastMsg = 0;
 let lastImg;
 
@@ -150,22 +151,30 @@ async function respond(message) {
     });
   }
   if (/\!pun/i.test(message.text)) {
-    console.log('Getting pun...');
-    const urlData = await pun();
-    console.log('Saw', urlData);
-    bot.sendPhoto({
-      chat_id: message.chat.id,
-      file_id: urlData.img,
-      caption: urlData.link,
-    });
-    // await bot.sendMessage({
-    //   chat_id: message.chat.id,
-    //   text: urlData.img,
-    // });
-    // await bot.sendMessage({
-    //   chat_id: message.chat.id,
-    //   text: urlData.link,
-    // });
+    const match = message.text.match(/!pun\s+([\w ]+)/);
+    if (match) {
+      const isCorrect = await answer(match[1]);
+      if (isCorrect) {
+        bot.sendMessage({
+          chat_id: message.chat.id,
+          text: `YES!: ${match[1].trim()}`,
+        });
+      } else {
+        bot.sendMessage({
+          chat_id: message.chat.id,
+          text: `NO: ${match[1].trim()}`,
+        });
+      }
+    } else {
+      console.log('Getting pun...');
+      const urlData = await getCurrentUrlAndPun();
+      console.log('Saw', urlData);
+      bot.sendPhoto({
+        chat_id: message.chat.id,
+        file_id: urlData.img,
+        caption: urlData.link,
+      });
+    }
   }
   if (/\!(sos|soup|samm(y|ie))/i.test(message.text)) {
     bot.sendMessage({
@@ -190,20 +199,6 @@ const sendSad = _.throttle(function (message) {
     text: util.format('https://i.imgur.com/%s.jpg', random(sad)),
   });
 }, 1000 * 60 * 5);
-
-async function pun() {
-  const { data } = await scrape('https://mondaypunday.com', {
-    img: {
-      selector: 'figure img',
-      attr: 'src',
-    },
-    link: {
-      selector: 'link[rel=canonical]',
-      attr: 'href',
-    },
-  });
-  return data;
-}
 
 // require('./gil');
 
