@@ -89,6 +89,10 @@ const bot = new Bot({
 })
   .on('message', message => {
     if (!message.text) return;
+    if (message.date + 60 < Date.now() / 1000) {
+      console.log('ignoring', message);
+      return;
+    }
     respond(message);
     /*
   const delay = (_.random(99) < 5) ? _.random(ms('2min'), ms('5min')) : 0;
