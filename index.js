@@ -72,9 +72,9 @@ const soup = [
 const e40 = ['Yup.', 'Nope.'];
 
 const sad = [
-  // 'jzdy5Hy',
-  // 'WCzfAJ8',
-  'yHSmvqb',
+  // 'jzdy5Hy.jpg',
+  // 'WCzfAJ8.jpg',
+  'KTqesGe.png',
 ];
 
 const committee = [
@@ -125,7 +125,7 @@ async function respond(message) {
       do {
         image = random(images);
       } while (image === lastImg);
-      msg = util.format('https://i.imgur.com/%s.jpg', image);
+      msg = util.format('https://i.imgur.com/%s', image);
       lastImg = image;
       time = Date.now();
     }
