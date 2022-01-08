@@ -74,7 +74,8 @@ const e40 = ['Yup.', 'Nope.'];
 const sad = [
   // 'jzdy5Hy.jpg',
   // 'WCzfAJ8.jpg',
-  'KTqesGe.png',
+  // 'KTqesGe.png',
+  'uHSBs7J.png',
 ];
 
 const committee = [
@@ -192,7 +193,7 @@ async function respond(message) {
       text: random(e40),
     });
   }
-  if (/\bsad\b/i.test(message.text)) {
+  if (/\bgood\b/i.test(message.text)) {
     sendSad(message);
   }
 }
@@ -200,9 +201,9 @@ async function respond(message) {
 const sendSad = _.throttle(function (message) {
   bot.sendMessage({
     chat_id: message.chat.id,
-    text: util.format('https://i.imgur.com/%s.jpg', random(sad)),
+    text: util.format('https://i.imgur.com/%s', random(sad)),
   });
-}, 1000 * 60 * 5);
+}, 1000 * 60 * 60 * 24);
 
 // require('./gil');
 
